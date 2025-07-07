@@ -3,9 +3,9 @@ import os
 import random
 import numpy as np
 import torch
-from .config import Config
-from .model_factory import ModelFactory
-from .trainer import Trainer
+from config import Config
+from model_factory import ModelFactory
+from trainer import Trainer
 
 def setup_environment():
     seed = 0
