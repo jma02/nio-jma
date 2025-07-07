@@ -5,7 +5,7 @@ This repository is the official implementation of the paper [**Neural Inverse Op
 
 <br/><br/>
 
-<img src="Images/NIORB.png" width="800" >
+<img src="NIORB.png" width="800" >
 
 <br/><br/>
 
