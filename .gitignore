@@ -1,3 +1,7 @@
+venv/
+
+data/*
+!data/utils/
 
 .DS_Store
 
