@@ -35,23 +35,23 @@ main_folder = sys.argv[4]
 n = 1000
 
 if which == "curve":
-    from Problems.CurveVel import MyDataset as MyDataset1
+    from Problems.curve_fwi.CurveVel import CurveVelDataset as CurveVelDataset1
 
     out_vec = torch.zeros((n, b, 70, 70)).to(device)
     inp_vec = torch.zeros((n, b, 1000, 70, 5)).to(device)
     shape = (70, 5)
 if which == "style":
-    from Problems.StlyleData import MyDataset as MyDataset1
+    from Problems.StyleData import StyleData as StyleData1
 
 if which == "sine" or which == "step" or which == "helm":
     if which == "sine":
-        from Problems.PoissonSin import MyDataset as MyDataset1
+        from Problems.PoissonSin import PoissonSinDataset as PoissonSinDataset1
     if which == "helm":
-        from Problems.HelmNIO import MyDataset as MyDataset1
+        from Problems.helmholtz.HelmNIO import HelmNIOData as HelmNIOData1
 if which == "eit":
-    from Problems.HeartLungsEIT import MyDataset as MyDataset1
+    from Problems.medical.HeartLungsEIT import HeartLungsEITDataset as HeartLungsEITDataset1
 if which == "rad":
-    from Problems.AlbedoOperator import MyDataset as MyDataset1
+    from Problems.AlbedoOperator import AlbedoData as AlbedoData1
 # %%
 
 
@@ -64,7 +64,7 @@ if which == "sine":
     model1 = torch.load(path1 + "/model.pkl", map_location=torch.device(device))
     model1 = model1.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
+    test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
 
 if which == "eit":
     mmax = 32
@@ -75,7 +75,7 @@ if which == "eit":
     model1 = torch.load(path1 + "/model.pkl", map_location=torch.device(device))
     model1 = model1.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
+    test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
 
 if which == "helm":
     mmax = 20
@@ -86,7 +86,7 @@ if which == "helm":
     model1 = torch.load(path1 + "/model.pkl", map_location=torch.device('cpu')).cpu()
     model1 = model1.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", mod="nio_new", noise=noise)
+    test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", mod="nio_new", noise=noise)
 
 if which == "rad":
     mmax = 32
@@ -97,7 +97,7 @@ if which == "rad":
     model1 = torch.load(path1 + "/model.pkl", map_location=torch.device('cpu')).cpu()
     model1 = model1.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", mod="nio_new", noise=noise)
+    test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", mod="nio_new", noise=noise)
 
 print("########################################################")
 print("NIO params")

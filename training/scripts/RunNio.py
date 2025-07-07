@@ -15,8 +15,13 @@ from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
 from Baselines import InversionNetHelm, InversionNetRad, InversionNetEIT
-from NIOModules import NIOHelmPermInv, NIOHeartPerm, NIORadPerm, NIOWavePerm
-from NIOModules import SNOHelmConv, SNOWaveConv2, SNOConvEIT, SNOConvRad
+from nio.helmholtz.helmholtz_nio import SNOHelmConv, NIOHelmPermInv
+from nio.wave.wave_nio import SNOWaveConv2
+from nio.wave.wave_nio import SNOConvEIT
+from nio.radiative.radiative_nio import SNOConvRad
+from nio.radiative.radiative_nio import NIORadPerm
+from nio.medical.medical_nio import NIOHeartPerm
+from nio.wave.wave_nio import NIOWavePerm
 from debug_tools import CudaMemoryDebugger
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
@@ -102,31 +107,31 @@ else:
     max_workers = int(sys.argv[9])
 
 if problem == "sine":
-    from Problems.PoissonSin import MyDataset
+    from Problems.PoissonSin import PoissonSinDataset
 
     padding_frac = 1 / 4
 elif problem == "helm":
-    from Problems.HelmNIO import MyDataset
+    from Problems.helmholtz.HelmNIO import HelmNIOData
 
     padding_frac = 1 / 4
 
 elif problem == "curve":
-    from Problems.CurveVel import MyDataset
+    from Problems.curve_fwi.CurveVel import CurveVelDataset
 
     padding_frac = 1 / 4
 
 elif problem == "style":
-    from Problems.StlyleData import MyDataset
+    from Problems.StyleData import StyleData
 
     padding_frac = 1 / 4
 
 elif problem == "rad":
-    from Problems.AlbedoOperator import MyDataset
+    from Problems.AlbedoOperator import AlbedoData
 
     padding_frac = 1 / 4
 
 elif problem == "eit":
-    from Problems.HeartLungsEIT import MyDataset
+    from Problems.medical.HeartLungsEIT import HeartLungsEITDataset
 
     padding_frac = 1 / 4
 if torch.cuda.is_available():
@@ -167,8 +172,8 @@ dict_hp.update(fno_architecture_)
 fno_input_dimension = denseblock_architecture_["neurons"]
 cuda_debugger = CudaMemoryDebugger(print_mem)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-train_dataset = MyDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="training", mod=mod)
-test_dataset = MyDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="validation", mod=mod, noise=0.1)
+train_dataset = PoissonSinDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="training", mod=mod)
+test_dataset = PoissonSinDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="validation", mod=mod, noise=0.1)
 inp_dim_branch = train_dataset.inp_dim_branch
 n_fun_samples = train_dataset.n_fun_samples
 

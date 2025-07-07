@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
+class HelmholtzMoreIncDataset(Dataset):
     def __init__(self, norm, inputs_bool, device, which, mod, problem, noise=0):
         # self.file_data = "/cluster/project/sam/mroberto/data/HelmholtzTomography.h5"
         if "helm" in problem:

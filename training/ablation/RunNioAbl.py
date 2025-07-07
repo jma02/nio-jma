@@ -14,7 +14,9 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-from NIOModules import NIOHelmPermInvAbl, NIOHeartPermAbl, NIORadPermAbl
+from nio.helmholtz.helmholtz_ablation import NIOHelmPermInvAbl
+from nio.medical.medical_ablation import NIOHeartPermAbl
+from nio.radiative.radiative_ablation import NIORadPermAbl
 from debug_tools import CudaMemoryDebugger
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
@@ -100,21 +102,21 @@ else:
     max_workers = int(sys.argv[9])
 
 if problem == "sine":
-    from Problems.PoissonSin import MyDataset
+    from Problems.PoissonSin import Helmholtz32LDataset
 
     padding_frac = 1 / 4
 elif problem == "helm":
-    from Problems.HelmNIO import MyDataset
+    from Problems.HelmNIO import Helmholtz32LDataset
 
     padding_frac = 1 / 4
 
 elif problem == "eit":
-    from Problems.HeartLungsEIT import MyDataset
+    from Problems.HeartLungsEIT import Helmholtz32LDataset
 
     padding_frac = 1 / 4
 
 elif problem == "rad":
-    from Problems.AlbedoOperator import MyDataset
+    from Problems.AlbedoOperator import Helmholtz32LDataset
 
     padding_frac = 1 / 4
 if torch.cuda.is_available():
@@ -155,8 +157,8 @@ dict_hp.update(fno_architecture_)
 fno_input_dimension = denseblock_architecture_["neurons"]
 cuda_debugger = CudaMemoryDebugger(print_mem)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-train_dataset = MyDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="training", mod=mod)
-test_dataset = MyDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="validation", mod=mod)
+train_dataset = Helmholtz32LDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="training", mod=mod)
+test_dataset = Helmholtz32LDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="validation", mod=mod)
 inp_dim_branch = train_dataset.inp_dim_branch
 n_fun_samples = train_dataset.n_fun_samples
 

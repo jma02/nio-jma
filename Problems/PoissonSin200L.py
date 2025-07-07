@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
+class PoissonSin200LDataset(Dataset):
     def __init__(self, norm, inputs_bool, device, which, mod, noise=0.):
         self.file_data_test = "data/Poisson70_L100.h5"
         self.file_data = "data/Poisson70_L20.h5"

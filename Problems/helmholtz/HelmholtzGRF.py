@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
+class HelmholtzGRFData(Dataset):
     def __init__(self, norm, inputs_bool, device, which, mod, noise=0):
         self.file_data = "data/HelmholtzTomography.h5"
         self.mod = mod

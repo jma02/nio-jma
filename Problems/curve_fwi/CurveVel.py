@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
+class CurveVelDataset(Dataset):
     def __init__(self, norm, inputs_bool, device, which, noise=0, mod="nio"):
         self.file_data = "data/CurveVelData.h5"
         self.noise = noise

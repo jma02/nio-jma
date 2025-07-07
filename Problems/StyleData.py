@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
+class StyleDataDataset(Dataset):
     def __init__(self, norm, inputs_bool, device, which, noise=0, mod="nio"):
         self.file_data = "data/StyleData.h5"
         self.noise = noise

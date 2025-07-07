@@ -49,13 +49,13 @@ if which == "sine" or which == "helm":
     out_vec = torch.zeros((n, b, 70, 70)).to(device)
     shape = (68, 20)
     if which == "sine":
-        from Problems.PoissonSin200L import MyDataset as MyDataset1
-        from Problems.PoissonSin200L import MyDataset as MyDataset2
-        from Problems.PoissonSin200L import MyDataset as MyDataset3
+        from Problems.PoissonSin200L import Helmholtz32LDataset as Helmholtz32LDataset1
+        from Problems.PoissonSin200L import Helmholtz32LDataset as Helmholtz32LDataset2
+        from Problems.PoissonSin200L import Helmholtz32LDataset as Helmholtz32LDataset3
     if which == "helm":
-        from Problems.Helm32L import MyDataset as MyDataset1
-        from Problems.Helm32L import MyDataset as MyDataset2
-        from Problems.Helm32L import MyDataset as MyDataset3
+        from Problems.Helm32L import Helmholtz32LDataset as Helmholtz32LDataset1
+        from Problems.Helm32L import Helmholtz32LDataset as Helmholtz32LDataset2
+        from Problems.Helm32L import Helmholtz32LDataset as Helmholtz32LDataset3
 # %%
 if which == "sine":
     path1 = "FinalModelNewPerm/Best_nio_new_" + which
@@ -74,9 +74,9 @@ if which == "sine":
     model3 = torch.load(path3 + "/model.pkl", map_location=torch.device(device))
     model3 = model3.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
-    test_dataset_2 = MyDataset2(norm=norm2, inputs_bool=True, device="cpu", which="testing", mod="fcnn", noise=noise)
-    test_dataset_3 = MyDataset2(norm=norm3, inputs_bool=True, device="cpu", which="testing", mod="don", noise=noise)
+    test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
+    test_dataset_2 = Helmholtz32LDataset2(norm=norm2, inputs_bool=True, device="cpu", which="testing", mod="fcnn", noise=noise)
+    test_dataset_3 = Helmholtz32LDataset2(norm=norm3, inputs_bool=True, device="cpu", which="testing", mod="don", noise=noise)
 
 if which == "helm":
     path1 = "FinalModelNewPerm/Best_nio_new_" + which
@@ -96,9 +96,9 @@ if which == "helm":
     model3 = torch.load(path3 + "/model.pkl", map_location=torch.device(device))
     model3 = model3.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", mod="nio_new", noise=noise)
-    test_dataset_2 = MyDataset2(norm=norm2, inputs_bool=True, device=device, which="testing", mod="fcnn", noise=noise)
-    test_dataset_3 = MyDataset3(norm=norm3, inputs_bool=True, device=device, which="testing", mod="don", noise=noise)
+    test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", mod="nio_new", noise=noise)
+    test_dataset_2 = Helmholtz32LDataset2(norm=norm2, inputs_bool=True, device=device, which="testing", mod="fcnn", noise=noise)
+    test_dataset_3 = Helmholtz32LDataset3(norm=norm3, inputs_bool=True, device=device, which="testing", mod="don", noise=noise)
 
 print("########################################################")
 print("NIO params")

@@ -42,9 +42,9 @@ pred_vec_3 = np.zeros((n, b, 70))
 out_vec = np.zeros((n, b, 70))
 inp_vec = np.zeros((n, b, 32, 32))
 
-from Problems.AlbedoOperator import MyDataset as MyDataset1
-from Problems.AlbedoOperator import MyDataset as MyDataset2
-from Problems.AlbedoOperator import MyDataset as MyDataset3
+from Problems.AlbedoOperator import Helmholtz32LDataset as Helmholtz32LDataset1
+from Problems.AlbedoOperator import Helmholtz32LDataset as Helmholtz32LDataset2
+from Problems.AlbedoOperator import Helmholtz32LDataset as Helmholtz32LDataset3
 
 # %%
 path1 = main_folder + "/Best_nio_new_rad"
@@ -65,9 +65,9 @@ model2 = model2.eval()
 model3 = torch.load(path3 + "/model.pkl", map_location=torch.device('cpu')).cpu()
 model3 = model3.eval()
 
-test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
-test_dataset_2 = MyDataset2(norm=norm2, inputs_bool=True, device="cpu", which="testing", mod="fcnn", noise=noise)
-test_dataset_3 = MyDataset3(norm=norm3, inputs_bool=True, device="cpu", which="testing", mod="don", noise=noise)
+test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
+test_dataset_2 = Helmholtz32LDataset2(norm=norm2, inputs_bool=True, device="cpu", which="testing", mod="fcnn", noise=noise)
+test_dataset_3 = Helmholtz32LDataset3(norm=norm3, inputs_bool=True, device="cpu", which="testing", mod="don", noise=noise)
 
 print("########################################################")
 print("NIO params")

@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
+class HeartLungsEITDataset(Dataset):
     def __init__(self, norm, inputs_bool, device, which, mod, noise=0., samples=4096):
         print("Training with ", samples, " samples")
         self.file_data = "data/BodyEIT.h5"

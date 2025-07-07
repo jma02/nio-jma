@@ -59,17 +59,17 @@ pred_vec_1 = torch.zeros((n, b, 70, 70)).to(device)
 pred_vec_2 = torch.zeros((n, b, 70, 70)).to(device)
 pred_vec_3 = torch.zeros((n, b, 70, 70)).to(device)
 if which == "curve":
-    from Problems.CurveVel import MyDataset as MyDataset1
-    from Problems.CurveVel import MyDataset as MyDataset2
-    from Problems.CurveVel import MyDataset as MyDataset3
+    from Problems.curve_fwi.CurveVel import CurveVelDataset as CurveVelDataset1
+    from Problems.curve_fwi.CurveVel import CurveVelDataset as CurveVelDataset2
+    from Problems.curve_fwi.CurveVel import CurveVelDataset as CurveVelDataset3
 
     out_vec = torch.zeros((n, b, 70, 70)).to(device)
     inp_vec = torch.zeros((n, b, 1000, 70, 5)).to(device)
     shape = (70, 5)
 if which == "style":
-    from Problems.StlyleData import MyDataset as MyDataset1
-    from Problems.StlyleData import MyDataset as MyDataset2
-    from Problems.StlyleData import MyDataset as MyDataset3
+    from Problems.StyleData import StyleData as StyleData1
+    from Problems.StyleData import StyleData as StyleData2
+    from Problems.StyleData import StyleData as StyleData3
 
     out_vec = torch.zeros((n, b, 70, 70)).to(device)
     inp_vec = torch.zeros((n, b, 1000, 70, 5)).to(device)
@@ -80,17 +80,17 @@ if which == "sine" or which == "step" or "helm" in which:
     inp_vec = torch.zeros((n, b, 4, 68, 20)).to(device)
     shape = (68, 20)
     if which == "sine":
-        from Problems.PoissonSin import MyDataset as MyDataset1
-        from Problems.PoissonSin import MyDataset as MyDataset2
-        from Problems.PoissonSin import MyDataset as MyDataset3
+        from Problems.PoissonSin import PoissonSinDataset as PoissonSinDataset1
+        from Problems.PoissonSin import PoissonSinDataset as PoissonSinDataset2
+        from Problems.PoissonSin import PoissonSinDataset as PoissonSinDataset3
     if "helm" in  which:
-        from Problems.HelmNIO import MyDataset as MyDataset1
-        from Problems.HelmNIO import MyDataset as MyDataset2
-        from Problems.HelmNIO import MyDataset as MyDataset3
+        from Problems.helmholtz.HelmNIO import HelmNIOData as HelmNIOData1
+        from Problems.helmholtz.HelmNIO import HelmNIOData as HelmNIOData2
+        from Problems.helmholtz.HelmNIO import HelmNIOData as HelmNIOData3
 if which == "eit":
-    from Problems.HeartLungsEIT import MyDataset as MyDataset1
-    from Problems.HeartLungsEIT import MyDataset as MyDataset2
-    from Problems.HeartLungsEIT import MyDataset as MyDataset3
+    from Problems.medical.HeartLungsEIT import HeartLungsEITDataset as HeartLungsEITDataset1
+    from Problems.medical.HeartLungsEIT import HeartLungsEITDataset as HeartLungsEITDataset2
+    from Problems.medical.HeartLungsEIT import HeartLungsEITDataset as HeartLungsEITDataset3
 
     out_vec = torch.zeros((n, b, 70, 70)).to(device)
     inp_vec = torch.zeros((n, b, 1, 32, 32)).to(device)
@@ -118,9 +118,9 @@ if which == "curve" or which == "style":
     model3 = torch.load(path3 + "/model.pkl", map_location=torch.device(device))
     model3 = model3.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", noise=noise, mod="nio_new")
-    test_dataset_2 = MyDataset2(norm=norm2, inputs_bool=True, device=device, which="testing", noise=noise)
-    test_dataset_3 = MyDataset3(norm=norm3, inputs_bool=True, device=device, which="testing", noise=noise)
+    test_dataset = CurveVelDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", noise=noise, mod="nio_new")
+    test_dataset_2 = CurveVelDataset2(norm=norm2, inputs_bool=True, device=device, which="testing", noise=noise)
+    test_dataset_3 = CurveVelDataset3(norm=norm3, inputs_bool=True, device=device, which="testing", noise=noise)
 
     print(norm1, norm2, norm3)
 
@@ -142,9 +142,9 @@ if which == "sine":
     model3 = torch.load(path3 + "/model.pkl", map_location=torch.device(device))
     model3 = model3.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
-    test_dataset_2 = MyDataset2(norm=norm2, inputs_bool=True, device="cpu", which="testing", mod="fcnn", noise=noise)
-    test_dataset_3 = MyDataset2(norm=norm3, inputs_bool=True, device="cpu", which="testing", mod="don", noise=noise)
+    test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
+    test_dataset_2 = Helmholtz32LDataset2(norm=norm2, inputs_bool=True, device="cpu", which="testing", mod="fcnn", noise=noise)
+    test_dataset_3 = Helmholtz32LDataset2(norm=norm3, inputs_bool=True, device="cpu", which="testing", mod="don", noise=noise)
 
 if which == "eit":
     path1 = main_folder + "/Best_nio_new_" + which
@@ -164,9 +164,9 @@ if which == "eit":
     model3 = torch.load(path3 + "/model.pkl", map_location=torch.device(device))
     model3 = model3.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
-    test_dataset_2 = MyDataset2(norm=norm2, inputs_bool=True, device="cpu", which="testing", mod="fcnn", noise=noise)
-    test_dataset_3 = MyDataset2(norm=norm3, inputs_bool=True, device="cpu", which="testing", mod="don", noise=noise)
+    test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
+    test_dataset_2 = Helmholtz32LDataset2(norm=norm2, inputs_bool=True, device="cpu", which="testing", mod="fcnn", noise=noise)
+    test_dataset_3 = Helmholtz32LDataset2(norm=norm3, inputs_bool=True, device="cpu", which="testing", mod="don", noise=noise)
 
 if "helm" in  which:
     path1 = main_folder + "/Best_nio_new_helm"
@@ -188,9 +188,9 @@ if "helm" in  which:
     model3 = torch.load(path3 + "/model.pkl", map_location=torch.device(device))
     model3 = model3.eval()
 
-    test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", mod="nio_new", noise=noise)
-    test_dataset_2 = MyDataset2(norm=norm2, inputs_bool=True, device=device, which="testing", mod="fcnn", noise=noise)
-    test_dataset_3 = MyDataset3(norm=norm3, inputs_bool=True, device=device, which="testing", mod="don", noise=noise)
+    test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device=device, which="testing", mod="nio_new", noise=noise)
+    test_dataset_2 = Helmholtz32LDataset2(norm=norm2, inputs_bool=True, device=device, which="testing", mod="fcnn", noise=noise)
+    test_dataset_3 = Helmholtz32LDataset3(norm=norm3, inputs_bool=True, device=device, which="testing", mod="don", noise=noise)
 
 print("########################################################")
 print("NIO params")

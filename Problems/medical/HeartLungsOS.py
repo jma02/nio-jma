@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
+class HeartLungsOSDataset(Dataset):
     def __init__(self, norm, inputs_bool, device, which, mod, noise=0.):
         self.file_data_testing = "data/BodyEIT_Comp_out.h5"
         self.file_data = "data/BodyEIT.h5"

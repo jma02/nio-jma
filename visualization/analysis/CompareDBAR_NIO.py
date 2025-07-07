@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import torch
-from Problems.HeartLungsEIT import MyDataset as MyDataset1
+from Problems.HeartLungsEIT import Helmholtz32LDataset as Helmholtz32LDataset1
 from scipy.interpolate import griddata
 
 
@@ -26,7 +26,7 @@ norm1 = pd.read_csv(path1 + "/training_properties.txt", header=None, sep=",", in
 model1 = torch.load(path1 + "/model.pkl", map_location=torch.device(device))
 model1 = model1.eval()
 
-test_dataset = MyDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
+test_dataset = Helmholtz32LDataset1(norm=norm1, inputs_bool=True, device="cpu", which="testing", mod="nio_new", noise=noise)
 
 folder = "data/data_8000"
 
