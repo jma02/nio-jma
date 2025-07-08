@@ -1,3 +1,5 @@
+# If I had more time or a better AI agent I would seriously rewrite this whole file.
+# Sorry! It's going to be hard to navigate, but it will work at least.
 import copy
 import json
 import os
@@ -14,10 +16,16 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-from Baselines import InversionNetHelm, InversionNetRad, InversionNetEIT
-from NIOModules import NIOHelmPermInv, NIOHeartPerm, NIORadPerm, NIOWavePerm
-from NIOModules import SNOHelmConv, SNOWaveConv2, SNOConvEIT, SNOConvRad
-from debug_tools import CudaMemoryDebugger
+from utils.Baselines import InversionNetHelm, InversionNetRad, InversionNetEIT
+from core.nio.helmholtz import NIOHelmPermInv
+from core.nio.eit import NIOHeartPerm
+from core.nio.radiative import NIORadPerm
+from core.nio.wave import NIOWavePerm
+from core.nio.helmholtz import SNOHelmConv
+from core.nio.wave import SNOWaveConv2
+from core.nio.eit import SNOConvEIT
+from core.nio.radiative import SNOConvRad
+from utils.debug_tools import CudaMemoryDebugger
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
@@ -101,34 +109,19 @@ else:
     mod = sys.argv[8]
     max_workers = int(sys.argv[9])
 
+padding_frac = 1 / 4
 if problem == "sine":
-    from Problems.PoissonSin import MyDataset
-
-    padding_frac = 1 / 4
+    from datasets.PoissonSin import PoissonSinDataset as MyDataset
 elif problem == "helm":
-    from Problems.HelmNIO import MyDataset
-
-    padding_frac = 1 / 4
-
+    from datasets.HelmNIO import HelmNIODataset as MyDataset
 elif problem == "curve":
-    from Problems.CurveVel import MyDataset
-
-    padding_frac = 1 / 4
-
+    from datasets.CurveVel import CurveVelDataset as MyDataset
 elif problem == "style":
-    from Problems.StlyleData import MyDataset
-
-    padding_frac = 1 / 4
-
+    from datasets.StyleData import StyleDataset as MyDataset
 elif problem == "rad":
-    from Problems.AlbedoOperator import MyDataset
-
-    padding_frac = 1 / 4
-
+    from datasets.AlbedoOperator import AlbedoOperatorDataset as MyDataset
 elif problem == "eit":
-    from Problems.HeartLungsEIT import MyDataset
-
-    padding_frac = 1 / 4
+    from datasets.HeartLungsEIT import HeartLungsEITDataset as MyDataset
 if torch.cuda.is_available():
     memory_avail = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
     print("Running on ", torch.cuda.get_device_name(0), "Total memory: ", memory_avail, " GB")

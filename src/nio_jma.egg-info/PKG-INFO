@@ -1,12 +1,90 @@
-### What I added:
-I cleaned up the entire repo structure, and to facilitate the new directory structure, added
-`setuptools`.
-To set everything up, on MacOS/Linux, run:
-```
-python -m venv ./venv
-source ./venv/bin/activate
-pip install -e .
-```
+Metadata-Version: 2.4
+Name: nio_jma
+Version: 0.1.0
+Summary: nio_jma
+Author-email: Jonathan Ma <johnma@udel.edu>
+License: MIT License
+        
+        Copyright (c) 2023 mroberto166
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: absl-py==1.4.0
+Requires-Dist: cachetools==5.3.1
+Requires-Dist: certifi==2023.5.7
+Requires-Dist: charset-normalizer==3.1.0
+Requires-Dist: contourpy==1.1.0
+Requires-Dist: cycler==0.11.0
+Requires-Dist: filelock==3.12.2
+Requires-Dist: fonttools==4.40.0
+Requires-Dist: google-auth==2.21.0
+Requires-Dist: google-auth-oauthlib==1.0.0
+Requires-Dist: GPUtil==1.4.0
+Requires-Dist: grpcio==1.56.0
+Requires-Dist: h5py==3.9.0
+Requires-Dist: idna==3.4
+Requires-Dist: importlib-metadata==6.7.0
+Requires-Dist: importlib-resources==5.12.0
+Requires-Dist: Jinja2==3.1.2
+Requires-Dist: kiwisolver==1.4.4
+Requires-Dist: Markdown==3.4.3
+Requires-Dist: MarkupSafe==2.1.3
+Requires-Dist: matplotlib==3.7.2
+Requires-Dist: mpmath==1.3.0
+Requires-Dist: networkx==3.1
+Requires-Dist: numpy==1.25.0
+Requires-Dist: oauthlib==3.2.2
+Requires-Dist: packaging==23.1
+Requires-Dist: pandas==2.0.3
+Requires-Dist: Pillow==10.0.0
+Requires-Dist: protobuf==4.23.3
+Requires-Dist: pyasn1==0.5.0
+Requires-Dist: pyasn1-modules==0.3.0
+Requires-Dist: pyparsing==3.0.9
+Requires-Dist: python-dateutil==2.8.2
+Requires-Dist: pytz==2023.3
+Requires-Dist: requests==2.31.0
+Requires-Dist: requests-oauthlib==1.3.1
+Requires-Dist: rsa==4.9
+Requires-Dist: scipy==1.11.1
+Requires-Dist: six==1.16.0
+Requires-Dist: sympy==1.12
+Requires-Dist: tensorboard==2.13.0
+Requires-Dist: tensorboard-data-server==0.7.1
+Requires-Dist: torch==2.0.1
+Requires-Dist: torchaudio==2.0.2
+Requires-Dist: torchvision==0.15.2
+Requires-Dist: tqdm==4.65.0
+Requires-Dist: typing_extensions==4.7.1
+Requires-Dist: tzdata==2023.3
+Requires-Dist: urllib3==1.26.16
+Requires-Dist: Werkzeug==2.3.6
+Requires-Dist: zipp==3.15.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Dynamic: license-file
+
 ### Neural Inverse Operators for solving PDE Inverse Problems
 This repository is the official implementation of the paper [**Neural Inverse Operators for solving PDE Inverse Problems**](https://openreview.net/pdf?id=S4fEjmWg4X)
 

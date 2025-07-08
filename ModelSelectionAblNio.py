@@ -25,6 +25,7 @@ for which in ["eit", "rad"]:
         denseblock_architecture_ = dict()
 
         dictionaries = [training_properties_, branch_architecture_, trunk_architecture_, fno_architecture_, denseblock_architecture_]
+        # I do not know what these are used for
         paths = ["/training_properties.txt", "/branch_architecture.txt", "/trunk_architecture.txt", "/fno_architecture.txt", "/denseblock_architecture.txt"]
         path = "FinalModelNewPerm/Best_" + model + "_" + which
         for dictionary, p in zip(dictionaries, paths):

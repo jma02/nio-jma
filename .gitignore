@@ -1,7 +1,12 @@
+venv/
+data/*
+!data/utils/
 
 .DS_Store
 
 .idea/
+
+# below are original author's stuff
 
 AssDiffSensTable.py
 
@@ -79,4 +84,3 @@ Problems/PoissonSinLowRes.py
 
 __pycache__/
 
-data/

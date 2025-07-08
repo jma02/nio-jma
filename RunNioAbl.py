@@ -14,8 +14,10 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-from NIOModules import NIOHelmPermInvAbl, NIOHeartPermAbl, NIORadPermAbl
-from debug_tools import CudaMemoryDebugger
+from core.nio.helmholtz import NIOHelmPermInvAbl
+from core.nio.eit import NIOHeartPermAbl
+from core.nio.radiative import NIORadPermAbl
+from utils.debug_tools import CudaMemoryDebugger
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
@@ -100,22 +102,16 @@ else:
     max_workers = int(sys.argv[9])
 
 if problem == "sine":
-    from Problems.PoissonSin import MyDataset
-
+    from datasets.PoissonSin import PoissonSinDataset as MyDataset
     padding_frac = 1 / 4
 elif problem == "helm":
-    from Problems.HelmNIO import MyDataset
-
+    from datasets.HelmNIO import HelmNIODataset as MyDataset
     padding_frac = 1 / 4
-
 elif problem == "eit":
-    from Problems.HeartLungsEIT import MyDataset
-
+    from datasets.HeartLungsEIT import HeartLungsEITDataset as MyDataset
     padding_frac = 1 / 4
-
 elif problem == "rad":
-    from Problems.AlbedoOperator import MyDataset
-
+    from datasets.AlbedoOperator import AlbedoOperatorDataset as MyDataset
     padding_frac = 1 / 4
 if torch.cuda.is_available():
     memory_avail = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
