@@ -1,51 +1,155 @@
-### Neural Inverse Operators for solving PDE Inverse Problems
-This repository is the official implementation of the paper [**Neural Inverse Operators for solving PDE Inverse Problems**](https://openreview.net/pdf?id=S4fEjmWg4X)
+# Neural Inverse Operators (NIO) for Solving PDE Inverse Problems
 
-<br/><br/>
+[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<img src="Images/NIORB.png" width="800" >
+This repository contains the official implementation of the paper [**Neural Inverse Operators for Solving PDE Inverse Problems**](https://openreview.net/pdf?id=S4fEjmWg4X).
 
-<br/><br/>
+<img src="NIORB.png" width="800" alt="NIO Architecture">
 
-#### Requirements
-The code is based on python 3 (version 3.7) and the packages required can be installed with
+## Table of Contents
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [Available Models](#available-models)
+- [Datasets](#datasets)
+- [Training](#training)
+- [Citation](#citation)
+- [License](#license)
+
+## Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/nio-jma.git
+   cd nio-jma
+   ```
+
+2. **Create and activate a virtual environment (recommended)**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+3. **Install the package in development mode**:
+   ```bash
+   pip install -e .
+   ```
+
+4. **Install additional dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Getting Started
+
+After installation, you can import and use the models directly in your Python code:
+
+```python
+from nio_jma import SNOHelmConv, NIOHelmPermInv, NIOHelmPermInvAbl
+
+# Create a model instance
+model = SNOHelmConv(
+    input_dimensions_branch=100,
+    input_dimensions_trunk=2,
+    network_properties_branch={"n_basis": 64, "n_layers": 4, "act": "relu"},
+    network_properties_trunk={"n_basis": 64, "n_layers": 4, "act": "relu"},
+    fno_architecture={"modes1": 12, "width": 20, "n_layers": 4},
+    device="cuda" if torch.cuda.is_available() else "cpu"
+)
 ```
-python3 -m pip install -r requirements.txt
-```
-#### Source Data
-We cover instances of the Poisson, Helmholtz and Radiative Transport equations.
-Data can be downloaded from https://zenodo.org/record/7566430 (14GB).
-Alternatively, run the script `download_data.py` which downloads all required data into the appropriate folder (it requires 'wget' to be installed on your system).
-```
-python3 download_data.py
-```
-The data for the Seismic Imaging problem can be downloaded at: https://openfwi-lanl.github.io/docs/data.html#vel. 
-Then, the h5 file required to run the code can be built by running: `GetStyleData.py` and `GetCurveData.py`
 
-#### Models Training
-Each of the benchmarks described in tha peper can be trained by running the python scripts `TrainNio.py`.
-In order to ba able to run the script, the following arguments have to be added (in the order):
-- name of the folder where to save the results
-- flag for the problem 
-- flag for the model
-- number of workers (usually 0, 1, or 2)
+## Available Models
 
-The flag for the problem must be one among:
-- `sine` for the Caldéron problem with trigonometric coefficients 
-- `eit` for the Caldéron problem with Heart&Lungs
-- `helm` for the inverse wave scattering
-- `rad` for the radiative transfer problem
-- `curve` for the seismic imaging with the CurveVel-A dataset
-- `style` for the seismic imaging with the CurveVel-A dataset
+The package provides several models for different PDE problems:
 
-The flag for the problem must be one among:
-- `nio_new` for NIO
-- `fcnn` for Fully Convolutional NN
-- `don` for DeepONet
+### Helmholtz Equation
+- `SNOHelmConv`: Standard NIO for Helmholtz equation
+- `NIOHelmPermInv`: NIO with permutation invariance
+- `NIOHelmPermInvAbl`: Ablation study variant
 
-For instance:
+### Wave Equation
+- `SNOWaveConv2`: Standard NIO for wave equation
+- `NIOWavePerm`: NIO with permutation invariance
+- `NIOWavePermAbl`: Ablation study variant
+
+### Radiative Transfer
+- `SNOConvRad`: Standard NIO for radiative transfer
+- `NIORadPerm`: NIO with permutation invariance
+- `NIORadPermAbl`: Ablation study variant
+
+### Medical Imaging (EIT)
+- `NIOHeartPerm`: NIO for EIT with heart and lungs
+- `NIOHeartPermAbl`: Ablation study variant
+- `SNOConvEIT`: Standard NIO for EIT
+
+## Datasets
+
+### Pre-computed Datasets
+We provide pre-computed datasets for various PDE problems:
+
+1. **Poisson, Helmholtz, and Radiative Transport Equations**
+   - Download from: [Zenodo](https://zenodo.org/record/7566430) (14GB)
+   - Or use the download script:
+     ```bash
+     python data/utils/download_data.py
+     ```
+
+2. **Seismic Imaging (OpenFWI Dataset)**
+   - Download from: [OpenFWI](https://openfwi-lanl.github.io/docs/data.html#vel)
+   - Preprocess the data:
+     ```bash
+     python data/utils/GetStyleData.py
+     python data/utils/GetCurveData.py
+     ```
+
+## Training
+
+Train models using the provided training script:
+
+```bash
+python -m training.scripts.RunNio OUTPUT_DIR PROBLEM MODEL [--workers N]
 ```
-python3 RunNio.py Example helm nio_new 0
+
+### Arguments:
+- `OUTPUT_DIR`: Directory to save training results
+- `PROBLEM`: Problem type (see below)
+- `MODEL`: Model architecture (see below)
+- `--workers`: Number of data loading workers (default: 0)
+
+### Problem Types:
+- `sine`: Caldéron problem with trigonometric coefficients
+- `eit`: Caldéron problem with Heart&Lungs
+- `helm`: Inverse wave scattering
+- `rad`: Radiative transfer problem
+- `curve`: Seismic imaging with CurveVel-A dataset
+- `style`: Seismic imaging with Style-A dataset
+
+### Model Architectures:
+- `nio_new`: Neural Inverse Operator (NIO)
+- `fcnn`: Fully Convolutional Neural Network
+- `don`: DeepONet
+
+### Example:
+```bash
+python -m training.scripts.RunNio results/helm_nio helm nio_new --workers 4
+```
+
+## Citation
+
+If you use this code in your research, please cite our paper:
+
+```bibtex
+@inproceedings{
+  title={Neural Inverse Operators for Solving PDE Inverse Problems},
+  author={Your Name and Coauthors},
+  booktitle={Conference on Neural Information Processing Systems},
+  year={2023}
+}
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ```
 

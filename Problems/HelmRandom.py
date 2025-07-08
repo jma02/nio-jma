@@ -5,7 +5,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
+class HelmholtzRandomDataset(Dataset):
     def __init__(self, norm, inputs_bool, device, which, mod, which_data, noise=0):
         self.mod = mod
         self.noise = noise

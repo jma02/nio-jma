@@ -1,3 +1,5 @@
+data/*
+!data/utils/
 venv/
 .DS_Store
 
@@ -79,4 +81,3 @@ Problems/PoissonSinLowRes.py
 
 __pycache__/
 
-data/

@@ -5,7 +5,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
+class Helmholtz32LDataset(Dataset):
 
     def __init__(self, norm, inputs_bool, device, which, mod, noise=0., res = 50):
         self.res_out = res

@@ -1,0 +1,3 @@
+[console_scripts]
+nio-train = training.scripts.RunNio:main
+
