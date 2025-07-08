@@ -18,7 +18,7 @@ This repository is the official implementation of the paper [**Neural Inverse Op
 
 #### Requirements
 YOU CAN DO THIS BUT `pip install -e .` DOES THIS FOR YOU.
-`
+
 The code is based on python 3 (version 3.7) and the packages required can be installed with
 ```
 python3 -m pip install -r requirements.txt

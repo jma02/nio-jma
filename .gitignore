@@ -5,6 +5,8 @@ data/*
 .DS_Store
 
 .idea/
+# my outputs
+Example/
 
 # below are original author's stuff
 

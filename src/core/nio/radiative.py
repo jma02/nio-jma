@@ -164,7 +164,7 @@ class NIORadPerm(nn.Module):
             reg_loss = reg_loss + torch.norm(param, q)
         return reg_loss
 
-        class NIORadPermAbl(nn.Module):
+class NIORadPermAbl(nn.Module):
     def __init__(self,
                  input_dimensions_branch,
                  input_dimensions_trunk,
