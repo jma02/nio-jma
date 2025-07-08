@@ -14,10 +14,10 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-from nio.helmholtz.helmholtz_ablation import NIOHelmPermInvAbl
-from nio.medical.medical_ablation import NIOHeartPermAbl
-from nio.radiative.radiative_ablation import NIORadPermAbl
-from debug_tools import CudaMemoryDebugger
+from core.nio.helmholtz.helmholtz_ablation import NIOHelmPermInvAbl
+from core.nio.medical.medical_ablation import NIOHeartPermAbl
+from core.nio.radiative.radiative_ablation import NIORadPermAbl
+from utils.debug_tools import CudaMemoryDebugger
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 

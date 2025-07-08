@@ -2,9 +2,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from Baselines import EncoderHelm2
-from DeepONetModules import FeedForwardNN, DeepOnetNoBiasOrg
-from FNOModules import FNO_WOR
+from core.fno import FNO2d, FNO_WOR
+from core.deeponet import FeedForwardNN, DeepOnetNoBiasOrg
+from utils.Baselines import EncoderHelm2
 
 class NIOHelmPermInvAbl(nn.Module):
     def __init__(self,

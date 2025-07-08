@@ -2,9 +2,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from Baselines import EncoderRad, EncoderRad2
-from DeepONetModules import FeedForwardNN, DeepOnetNoBiasOrg
-from FNOModules import FNO1d, FNO1d_WOR
+from core.deeponet import FeedForwardNN, DeepOnetNoBiasOrg
+from core.fno import FNO1d, FNO1d_WOR
+from utils.Baselines import EncoderRad, EncoderRad2
 
 class SNOConvRad(nn.Module):
     def __init__(self,

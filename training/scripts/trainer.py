@@ -4,7 +4,7 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 import numpy as np
-from debug_tools import CudaMemoryDebugger
+from utils.debug_tools import CudaMemoryDebugger
 
 class Trainer:
     def __init__(self, config, model, train_dataset, test_dataset):
@@ -46,9 +46,11 @@ class Trainer:
         self.writer = SummaryWriter(config.folder)
         
     def train(self):
-        patience = 10
         counter = 0
         best_loss = float('inf')
+        
+        # Get grid from the dataset
+        grid = self.train_dataset.get_grid().to(self.device)
         
         for epoch in range(self.config.training_properties["epochs"]):
             self.model.train()
@@ -58,11 +60,15 @@ class Trainer:
             with tqdm(unit="batch", disable=False) as tepoch:
                 tepoch.set_description(f"Epoch {epoch}")
                 
-                for batch_idx, (branch_input, trunk_input, target) in enumerate(self.train_loader):
-                    branch_input, trunk_input, target = branch_input.to(self.device), trunk_input.to(self.device), target.to(self.device)
+                for batch_idx, (inputs, target) in enumerate(self.train_loader):
+                    inputs, target = inputs.to(self.device), target.to(self.device)
+                    
+                    # Expand grid to match batch size
+                    batch_size = inputs.size(0)
+                    batch_grid = grid.expand(batch_size, *grid.shape[1:]).to(self.device)
                     
                     self.optimizer.zero_grad()
-                    output = self.model(branch_input, trunk_input)
+                    output = self.model(inputs, batch_grid)
                     loss = torch.nn.functional.mse_loss(output, target)
                     loss.backward()
                     self.optimizer.step()
@@ -85,9 +91,11 @@ class Trainer:
                 running_relative_test_mse = 0.0
                 
                 with torch.no_grad():
-                    for batch_idx, (branch_input, trunk_input, target) in enumerate(self.test_loader):
-                        branch_input, trunk_input, target = branch_input.to(self.device), trunk_input.to(self.device), target.to(self.device)
-                        output = self.model(branch_input, trunk_input)
+                    for batch_idx, (inputs, target) in enumerate(self.test_loader):
+                        inputs, target = inputs.to(self.device), target.to(self.device)
+                        batch_size = inputs.size(0)
+                        batch_grid = grid.expand(batch_size, *grid.shape[1:]).to(self.device)
+                        output = self.model(inputs, batch_grid)
                         loss = torch.nn.functional.mse_loss(output, target)
                         test_mse += loss.item()
                         relative_mse = torch.mean(torch.square((output - target) / (target + 1e-8))).item()

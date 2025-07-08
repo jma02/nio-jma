@@ -7,7 +7,7 @@ from math import ceil
 import torch.nn as nn
 import torch.nn.functional as F
 
-from debug_tools import *
+from .debug_tools import *
 
 NORM_LAYERS = {'bn': nn.BatchNorm2d, 'in': nn.InstanceNorm2d, 'ln': nn.LayerNorm}
 

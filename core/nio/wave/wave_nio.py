@@ -2,9 +2,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from Baselines import EncoderInversionNet
-from DeepONetModules import FeedForwardNN, FourierFeatures, DeepOnetNoBiasOrg
-from FNOModules import FNO2d, FNO_WOR
+from core.deeponet import FeedForwardNN, DeepOnetNoBiasOrg, FourierFeatures
+from core.fno import FNO2d, FNO_WOR
+from utils.Baselines import EncoderInversionNet
 
 class SNOWaveConv2(nn.Module):
     def __init__(self,

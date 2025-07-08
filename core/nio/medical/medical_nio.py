@@ -2,9 +2,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from Baselines import EncoderRad2, EncoderRad
-from DeepONetModules import FeedForwardNN, DeepOnetNoBiasOrg
-from FNOModules import FNO_WOR, FNO2d
+from core.deeponet import FeedForwardNN, DeepOnetNoBiasOrg
+from core.fno import FNO2d, FNO_WOR
+from utils.Baselines import EncoderRad, EncoderRad2
 
 class NIOHeartPerm(nn.Module):
     def __init__(self,

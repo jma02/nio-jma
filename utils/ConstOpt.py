@@ -5,8 +5,8 @@ import numpy as np
 import torch
 from torch.utils.tensorboard import SummaryWriter
 
-from DeepONetModules import KappaOpt
-from SolveHelmTorch import solve_helm
+from core.deeponet.DeepONetModules import KappaOpt
+from .SolveHelmTorch import solve_helm
 
 L = int(sys.argv[1])
 folder = sys.argv[2]

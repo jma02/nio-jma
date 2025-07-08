@@ -2,9 +2,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from Baselines import EncoderHelm, EncoderHelm2, EncoderRad
-from DeepONetModules import FeedForwardNN, DeepOnetNoBiasOrg
-from FNOModules import FNO2d, FNO_WOR
+from core.deeponet import FeedForwardNN, DeepOnetNoBiasOrg
+from core.fno import FNO2d, FNO_WOR
+from utils.Baselines import EncoderHelm, EncoderHelm2
 
 class SNOHelmConv(nn.Module):
     def __init__(self,

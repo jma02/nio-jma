@@ -5,29 +5,68 @@ This module provides various implementations of Neural Inverse Operators for dif
 Classes are organized by problem type and include both main implementations and ablation studies.
 """
 
-# Helmholtz classes
-from .helmholtz.helmholtz_nio import SNOHelmConv, NIOHelmPermInv
-from .helmholtz.helmholtz_ablation import NIOHelmPermInvAbl
+# Import key components from submodules with error handling
+try:
+    from .helmholtz import (
+        SNOHelmConv,
+        NIOHelmPermInv,
+        NIOHelmPermInvAbl
+    )
+    HELMHOLTZ_AVAILABLE = True
+except ImportError as e:
+    print(f"Warning: Could not import helmholtz module: {e}")
+    HELMHOLTZ_AVAILABLE = False
 
-# Radiative classes
-from .radiative.radiative_nio import SNOConvRad, NIORadPerm
-from .radiative.radiative_ablation import NIORadPermAbl
+try:
+    from .radiative import (
+        SNOConvRad,
+        NIORadPerm,
+        NIORadPermAbl
+    )
+    RADIATIVE_AVAILABLE = True
+except ImportError as e:
+    print(f"Warning: Could not import radiative module: {e}")
+    RADIATIVE_AVAILABLE = False
 
-# Wave classes
-from .wave.wave_nio import SNOWaveConv2, NIOWavePerm
-from .wave.wave_ablation import NIOWavePermAbl
+from .wave import (
+    SNOWaveConv2,
+    NIOWavePerm,
+    NIOWavePermAbl
+)
 
-# Medical classes
-from .medical.medical_nio import NIOHeartPerm, SNOConvEIT
-from .medical.medical_ablation import NIOHeartPermAbl
+from .medical import (
+    NIOHeartPerm,
+    NIOHeartPermAbl,
+    SNOConvEIT
+)
 
+# Re-export key components
 __all__ = [
-    # Helmholtz
-    'SNOHelmConv', 'NIOHelmPermInv', 'NIOHelmPermInvAbl',
-    # Radiative
-    'SNOConvRad', 'NIORadPerm', 'NIORadPermAbl',
-    # Wave
-    'SNOWaveConv2', 'NIOWavePerm', 'NIOWavePermAbl',
-    # Medical
-    'NIOHeartPerm', 'SNOConvEIT', 'NIOHeartPermAbl'
+    # Helmholtz models
+    'SNOHelmConv',
+    'NIOHelmPermInv',
+    'NIOHelmPermInvAbl',
+    'HELMHOLTZ_AVAILABLE',
+    
+    # Radiative models
+    'SNOConvRad',
+    'NIORadPerm',
+    'NIORadPermAbl',
+    'RADIATIVE_AVAILABLE',
+    
+    # Wave models
+    'SNOWaveConv2',
+    'NIOWavePerm',
+    'NIOWavePermAbl',
+    
+    # Medical models
+    'NIOHeartPerm',
+    'NIOHeartPermAbl',
+    'SNOConvEIT',
+    
+    # Submodules
+    'helmholtz',
+    'radiative',
+    'wave',
+    'medical'
 ]

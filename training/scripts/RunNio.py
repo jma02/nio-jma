@@ -1,11 +1,28 @@
-import sys
+#!/usr/bin/env python3
+"""
+Main training script for NIO models.
+"""
 import os
+import sys
 import random
 import numpy as np
 import torch
-from config import Config
-from model_factory import ModelFactory
-from trainer import Trainer
+from pathlib import Path
+
+# Add the project root to Python path
+project_root = str(Path(__file__).resolve().parents[2])
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+# Import configuration and utilities
+try:
+    from training.scripts.config import Config
+    from training.scripts.model_factory import ModelFactory
+    from training.scripts.trainer import Trainer
+except ImportError as e:
+    print(f"Error importing modules: {e}")
+    print("Please make sure you have installed the package in development mode with 'pip install -e .'")
+    sys.exit(1)
 
 def setup_environment():
     seed = 0
@@ -22,8 +39,18 @@ def setup_environment():
 def main():
     setup_environment()
     
+    if len(sys.argv) < 4:
+        print("Usage: python RunNio.py <folder> <problem> <mod> <max_workers>")
+        print("Example: python RunNio.py example helm nio_new 0")
+        sys.exit(1)
+    
     folder = sys.argv[1]
-    config = Config.from_args(folder, *sys.argv[2:])
+    problem = sys.argv[2]
+    mod = sys.argv[3]
+    max_workers = int(sys.argv[4]) if len(sys.argv) > 4 else 0
+    
+    # Create default config with provided arguments
+    config = Config.from_args(folder, problem, mod, max_workers)
     config.save_config()
     
     # Initialize problem-specific dataset
