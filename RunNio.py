@@ -1,5 +1,3 @@
-# If I had more time or a better AI agent I would seriously rewrite this whole file.
-# Sorry! It's going to be hard to navigate, but it will work at least.
 import copy
 import json
 import os
@@ -16,15 +14,6 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-from utils.Baselines import InversionNetHelm, InversionNetRad, InversionNetEIT
-from core.nio.helmholtz import NIOHelmPermInv
-from core.nio.eit import NIOHeartPerm
-from core.nio.radiative import NIORadPerm
-from core.nio.wave import NIOWavePerm
-from core.nio.helmholtz import SNOHelmConv
-from core.nio.wave import SNOWaveConv2
-from core.nio.eit import SNOConvEIT
-from core.nio.radiative import SNOConvRad
 from utils.debug_tools import CudaMemoryDebugger
 from run_nio_config import (
     get_training_properties,
@@ -52,6 +41,7 @@ folder = sys.argv[1]
 freq_print = 1
 
 if len(sys.argv) == 5:
+    # Check run_nio_config.py
     training_properties_ = get_training_properties()
     branch_architecture_ = get_branch_architecture()
     trunk_architecture_ = get_trunk_architecture()
@@ -83,6 +73,7 @@ elif problem == "rad":
     from datasets.AlbedoOperator import AlbedoOperatorDataset as MyDataset
 elif problem == "eit":
     from datasets.HeartLungsEIT import HeartLungsEITDataset as MyDataset
+
 if torch.cuda.is_available():
     memory_avail = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
     print("Running on ", torch.cuda.get_device_name(0), "Total memory: ", memory_avail, " GB")
