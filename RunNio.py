@@ -26,6 +26,14 @@ from core.nio.wave import SNOWaveConv2
 from core.nio.eit import SNOConvEIT
 from core.nio.radiative import SNOConvRad
 from utils.debug_tools import CudaMemoryDebugger
+from run_nio_config import (
+    get_training_properties,
+    get_branch_architecture,
+    get_denseblock_architecture,
+    get_fno_architecture,
+    get_trunk_architecture,
+    get_model
+)
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
@@ -44,72 +52,25 @@ folder = sys.argv[1]
 freq_print = 1
 
 if len(sys.argv) == 5:
-    training_properties_ = {
-        "step_size": 15,
-        "gamma": 1,
-        "epochs": 100,
-        "batch_size": 256,
-        "learning_rate": 0.001,
-        "norm": "log-minmax",
-        "weight_decay": 0,
-        "reg_param": 0,
-        "reg_exponent": 1,
-        "inputs": 2,
-        "b_scale": 0.,
-        "retrain": 888,
-        "mapping_size_ff": 32,
-        "scheduler": "step"
-    }
-
-    branch_architecture_ = {
-        "n_hidden_layers": 3,
-        "neurons": 64,
-        "act_string": "leaky_relu",
-        "dropout_rate": 0.0,
-        "kernel_size": 3
-    }
-
-    trunk_architecture_ = {
-        "n_hidden_layers": 8,
-        "neurons": 256,
-        "act_string": "leaky_relu",
-        "dropout_rate": 0.0,
-        "n_basis": 50
-    }
-
-    fno_architecture_ = {
-        "width": 64,
-        "modes": 16,
-        "n_layers": 1,
-    }
-
-    denseblock_architecture_ = {
-        "n_hidden_layers": 4,
-        "neurons": 2000,
-        "act_string": "leaky_relu",
-        "retrain": 56,
-        "dropout_rate": 0.0
-    }
-
+    training_properties_ = get_training_properties()
+    branch_architecture_ = get_branch_architecture()
+    trunk_architecture_ = get_trunk_architecture()
+    fno_architecture_ = get_fno_architecture()
+    denseblock_architecture_ = get_denseblock_architecture()
     problem = sys.argv[2]
     mod = sys.argv[3]
     max_workers = int(sys.argv[4])
 else:
     training_properties_ = json.loads(sys.argv[2].replace("\'", "\""))
-
     branch_architecture_ = json.loads(sys.argv[3].replace("\'", "\""))
-
     trunk_architecture_ = json.loads(sys.argv[4].replace("\'", "\""))
-
     fno_architecture_ = json.loads(sys.argv[5].replace("\'", "\""))
-
     denseblock_architecture_ = json.loads(sys.argv[6].replace("\'", "\""))
-
     problem = sys.argv[7]
     mod = sys.argv[8]
     max_workers = int(sys.argv[9])
 
-padding_frac = 1 / 4
+# padding_frac = 1 / 4
 if problem == "sine":
     from datasets.PoissonSin import PoissonSinDataset as MyDataset
 elif problem == "helm":
@@ -173,101 +134,29 @@ if not os.path.isdir(folder):
 
     df = pd.DataFrame.from_dict([training_properties_]).T
     df.to_csv(folder + '/training_properties.txt', header=False, index=True, mode='a')
-
     df = pd.DataFrame.from_dict([branch_architecture_]).T
     df.to_csv(folder + '/branch_architecture.txt', header=False, index=True, mode='a')
-
     df = pd.DataFrame.from_dict([trunk_architecture_]).T
     df.to_csv(folder + '/trunk_architecture.txt', header=False, index=True, mode='a')
-
     df = pd.DataFrame.from_dict([fno_architecture_]).T
     df.to_csv(folder + '/fno_architecture.txt', header=False, index=True, mode='a')
-
     df = pd.DataFrame.from_dict([denseblock_architecture_]).T
     df.to_csv(folder + '/denseblock_architecture.txt', header=False, index=True, mode='a')
-    if mod == "nio" or mod == "don":
-        print("Using CNIO")
-        if problem == "sine" or problem == "helm" or problem == "step":
-            model = SNOHelmConv(input_dimensions_branch=inp_dim_branch,
-                                input_dimensions_trunk=grid.shape[2],
-                                network_properties_branch=branch_architecture_,
-                                network_properties_trunk=trunk_architecture_,
-                                fno_architecture=fno_architecture_,
-                                device=device,
-                                retrain_seed=retrain_seed)
-        elif problem == "curve" or problem == "style":
-            model = SNOWaveConv2(input_dimensions_branch=inp_dim_branch,
-                                 input_dimensions_trunk=grid.shape[2],
-                                 network_properties_branch=branch_architecture_,
-                                 network_properties_trunk=trunk_architecture_,
-                                 fno_architecture=fno_architecture_,
-                                 device=device,
-                                 retrain_seed=retrain_seed,
-                                 b_scale=b_scale,
-                                 mapping_size=mapping_size)
-        elif problem == "rad":
-            model = SNOConvRad(input_dimensions_branch=inp_dim_branch,
-                               input_dimensions_trunk=1,
-                               network_properties_branch=branch_architecture_,
-                               network_properties_trunk=trunk_architecture_,
-                               fno_architecture=fno_architecture_,
-                               device=device,
-                               retrain_seed=retrain_seed)
-        elif problem == "eit":
-            model = SNOConvEIT(input_dimensions_branch=inp_dim_branch,
-                               input_dimensions_trunk=grid.shape[2],
-                               network_properties_branch=branch_architecture_,
-                               network_properties_trunk=trunk_architecture_,
-                               fno_architecture=fno_architecture_,
-                               device=device,
-                               retrain_seed=retrain_seed)
-    elif mod == "fcnn":
-        print("Using FCNN")
-        if problem == "sine" or problem == "helm" or problem == "step":
-            model = InversionNetHelm(int(branch_architecture_["neurons"]))
-        elif problem == "rad":
-            model = InversionNetRad(int(branch_architecture_["neurons"]))
-        elif problem == "eit":
-            model = InversionNetEIT(int(branch_architecture_["neurons"]))
-    else:
-        print("Using FCNIO")
-        if problem == "sine" or problem == "helm" or problem == "step":
-            model = NIOHelmPermInv(input_dimensions_branch=inp_dim_branch,
-                                   input_dimensions_trunk=grid.shape[2],
-                                   network_properties_branch=branch_architecture_,
-                                   network_properties_trunk=trunk_architecture_,
-                                   fno_architecture=fno_architecture_,
-                                   device=device,
-                                   retrain_seed=retrain_seed,
-                                   fno_input_dimension=fno_input_dimension)
-
-        elif problem == "curve" or problem == "style":
-            model = NIOWavePerm(input_dimensions_branch=inp_dim_branch,
-                                input_dimensions_trunk=grid.shape[2],
-                                network_properties_branch=branch_architecture_,
-                                network_properties_trunk=trunk_architecture_,
-                                fno_architecture=fno_architecture_,
-                                device=device,
-                                retrain_seed=retrain_seed,
-                                fno_input_dimension=fno_input_dimension)
-        elif problem == "rad":
-            model = NIORadPerm(input_dimensions_branch=inp_dim_branch,
-                               input_dimensions_trunk=1,
-                               network_properties_branch=branch_architecture_,
-                               network_properties_trunk=trunk_architecture_,
-                               fno_architecture=fno_architecture_,
-                               device=device,
-                               retrain_seed=retrain_seed,
-                               fno_input_dimension=fno_input_dimension)
-        elif problem == "eit":
-            model = NIOHeartPerm(input_dimensions_branch=inp_dim_branch,
-                                 input_dimensions_trunk=2,
-                                 network_properties_branch=branch_architecture_,
-                                 network_properties_trunk=trunk_architecture_,
-                                 fno_architecture=fno_architecture_,
-                                 device=device,
-                                 retrain_seed=retrain_seed,
-                                 fno_input_dimension=fno_input_dimension)
+    
+    model = get_model(
+        mod,
+        problem,
+        inp_dim_branch,
+        grid,
+        branch_architecture_,
+        trunk_architecture_,
+        fno_architecture_,
+        denseblock_architecture_,
+        device,
+        retrain_seed,
+        fno_input_dimension
+    )
+   
     start_epoch = 0
     best_model_testing_error = 100
     best_model = None
@@ -287,87 +176,19 @@ else:
 
     else:
         print("Found no model. Creating a new one")
-        if mod == "nio" or mod == "don":
-            if problem == "sine" or problem == "helm" or problem == "step":
-                model = SNOHelmConv(input_dimensions_branch=inp_dim_branch,
-                                    input_dimensions_trunk=grid.shape[2],
-                                    network_properties_branch=branch_architecture_,
-                                    network_properties_trunk=trunk_architecture_,
-                                    fno_architecture=fno_architecture_,
-                                    device=device,
-                                    retrain_seed=retrain_seed)
-            elif problem == "curve" or problem == "style":
-                model = SNOWaveConv2(input_dimensions_branch=inp_dim_branch,
-                                     input_dimensions_trunk=grid.shape[2],
-                                     network_properties_branch=branch_architecture_,
-                                     network_properties_trunk=trunk_architecture_,
-                                     fno_architecture=fno_architecture_,
-                                     device=device,
-                                     retrain_seed=retrain_seed,
-                                     b_scale=b_scale,
-                                     mapping_size=mapping_size)
-            elif problem == "rad":
-                model = SNOConvRad(input_dimensions_branch=inp_dim_branch,
-                                   input_dimensions_trunk=1,
-                                   network_properties_branch=branch_architecture_,
-                                   network_properties_trunk=trunk_architecture_,
-                                   fno_architecture=fno_architecture_,
-                                   device=device,
-                                   retrain_seed=retrain_seed)
-            elif problem == "eit":
-                model = SNOConvEIT(input_dimensions_branch=inp_dim_branch,
-                                   input_dimensions_trunk=grid.shape[2],
-                                   network_properties_branch=branch_architecture_,
-                                   network_properties_trunk=trunk_architecture_,
-                                   fno_architecture=fno_architecture_,
-                                   device=device,
-                                   retrain_seed=retrain_seed)
-        elif mod == "fcnn":
-            if problem == "sine" or problem == "helm" or problem == "step":
-                model = InversionNetHelm(int(branch_architecture_["neurons"]))
-            elif problem == "rad":
-                model = InversionNetRad(int(branch_architecture_["neurons"]))
-            elif problem == "eit":
-                model = InversionNetEIT(int(branch_architecture_["neurons"]))
-        else:
-            if problem == "sine" or problem == "helm" or problem == "step":
-                model = NIOHelmPermInv(input_dimensions_branch=inp_dim_branch,
-                                       input_dimensions_trunk=grid.shape[2],
-                                       network_properties_branch=branch_architecture_,
-                                       network_properties_trunk=trunk_architecture_,
-                                       fno_architecture=fno_architecture_,
-                                       device=device,
-                                       retrain_seed=retrain_seed,
-                                       fno_input_dimension=fno_input_dimension)
-            elif problem == "curve" or problem == "style":
-                model = NIOWavePerm(input_dimensions_branch=inp_dim_branch,
-                                    input_dimensions_trunk=grid.shape[2],
-                                    network_properties_branch=branch_architecture_,
-                                    network_properties_trunk=trunk_architecture_,
-                                    fno_architecture=fno_architecture_,
-                                    device=device,
-                                    retrain_seed=retrain_seed,
-                                    fno_input_dimension=fno_input_dimension)
-            elif problem == "rad":
-                model = NIORadPerm(input_dimensions_branch=inp_dim_branch,
-                                   input_dimensions_trunk=1,
-                                   network_properties_branch=branch_architecture_,
-                                   network_properties_trunk=trunk_architecture_,
-                                   fno_architecture=fno_architecture_,
-                                   device=device,
-                                   retrain_seed=retrain_seed,
-                                   fno_input_dimension=fno_input_dimension)
-
-            elif problem == "eit":
-                model = NIOHeartPerm(input_dimensions_branch=inp_dim_branch,
-                                     input_dimensions_trunk=2,
-                                     network_properties_branch=branch_architecture_,
-                                     network_properties_trunk=trunk_architecture_,
-                                     fno_architecture=fno_architecture_,
-                                     device=device,
-                                     retrain_seed=retrain_seed,
-                                     fno_input_dimension=fno_input_dimension)
-
+        model = get_model(
+            mod,
+            problem,
+            inp_dim_branch,
+            grid,
+            branch_architecture_,
+            trunk_architecture_,
+            fno_architecture_,
+            denseblock_architecture_,
+            device,
+            retrain_seed,
+            fno_input_dimension
+        ) 
         start_epoch = 0
         best_model_testing_error = 100
         best_model = None
