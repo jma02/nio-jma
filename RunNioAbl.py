@@ -14,9 +14,9 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-from core.nio.helmholtz import NIOHelmPermInvAbl
-from core.nio.eit import NIOHeartPermAbl
-from core.nio.radiative import NIORadPermAbl
+from core.nio.helmholtz_abl import NIOHelmPermInvAbl
+from core.nio.eit_abl import NIOHeartPermAbl
+from core.nio.radiative_abl import NIORadPermAbl
 from utils.debug_tools import CudaMemoryDebugger
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'

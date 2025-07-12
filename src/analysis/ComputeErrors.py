@@ -8,8 +8,7 @@ import numpy as np
 import pandas as pd
 import torch
 from torch.utils.data import DataLoader
-
-import network
+import core.fwi.network as network
 
 np.random.seed(42)
 random.seed(42)
