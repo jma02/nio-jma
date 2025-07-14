@@ -5,21 +5,19 @@ from torch.utils.data import Dataset
 
 class BornFarField(Dataset):
     def __init__(self, norm, inputs_bool, device, which, mod, noise=0):
-        self.file_data = "data/HelmholtzTomography.h5"
+        self.file_data = "data/merged_data_split.hdf5"
         self.mod = mod
         self.noise = noise
+        self.which = which
         if which == "training":
-            self.length = 10000
+            self.length = 7000
             self.start = 0
-            self.which = which
         elif which == "validation":
-            self.length = 1000
-            self.start = 10000
-            self.which = which
+            self.length = 1500
+            self.start = 7000
         else:
-            self.length = 12621 - 11000
-            self.start = 11000
-            self.which = which
+            self.length = 1500
+            self.start = 8500
         self.reader = h5py.File(self.file_data, 'r')
         self.mean_inp = torch.from_numpy(self.reader['mean_inp_fun'][:, :]).type(torch.float32)
         self.mean_out = torch.from_numpy(self.reader['mean_out_fun'][:, :]).type(torch.float32)
