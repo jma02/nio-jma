@@ -2,10 +2,10 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from utils.Baselines import EncoderInversionNet, EncoderHelm, EncoderRad, EncoderHelm2, EncoderInversionNet2, EncoderRad2
+from utils.Baselines import EncoderInversionNet, EncoderInversionNet2
 from core.deeponet.DeepONetModules import FeedForwardNN, \
     FourierFeatures, DeepOnetNoBiasOrg
-from core.fno.FNOModules import FNO2d, FNO1d, FNO_WOR, FNO1d_WOR
+from core.fno.FNOModules import FNO2d, FNO_WOR
 
 class SNOWaveConv2(nn.Module):
     def __init__(self,

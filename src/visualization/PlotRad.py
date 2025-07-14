@@ -42,9 +42,9 @@ pred_vec_3 = np.zeros((n, b, 70))
 out_vec = np.zeros((n, b, 70))
 inp_vec = np.zeros((n, b, 32, 32))
 
-from Problems.AlbedoOperator import MyDataset as MyDataset1
-from Problems.AlbedoOperator import MyDataset as MyDataset2
-from Problems.AlbedoOperator import MyDataset as MyDataset3
+from datasets.AlbedoOperator import MyDataset as MyDataset1
+from datasets.AlbedoOperator import MyDataset as MyDataset2
+from datasets.AlbedoOperator import MyDataset as MyDataset3
 
 # %%
 path1 = main_folder + "/Best_nio_new_rad"

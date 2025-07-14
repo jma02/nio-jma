@@ -59,6 +59,7 @@ For instance:
 python3 RunNio.py Example helm nio_new 0
 
 ```
+Note: The authors say you should use the `nio_new` flag but based on what I've read in their code, `nio` should be the correct argument.
 
 The models' hyperparameter can be specified in the corresponding python scripts as well.
 To train the InversionNet model (the fully convolutional network baseline for Seismic Imaging) please refer to the GitHub page of Deng et Al (https://arxiv.org/pdf/2111.02926.pdf): https://github.com/lanl/OpenFWI

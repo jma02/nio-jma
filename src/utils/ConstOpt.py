@@ -5,7 +5,7 @@ import numpy as np
 import torch
 from torch.utils.tensorboard import SummaryWriter
 
-from core.DeepONetModules import KappaOpt
+from core.deeponet.DeepONetModules import KappaOpt
 from utils.SolveHelmTorch import solve_helm
 
 L = int(sys.argv[1])
