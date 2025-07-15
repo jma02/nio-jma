@@ -102,4 +102,4 @@ fig.colorbar(im5, ax=axs[1, 1], fraction=0.046, pad=0.04)
 fig.colorbar(im6, ax=axs[1, 2], fraction=0.046, pad=0.04)
 # Save the figure
 out_path = Path("src/visualization/images/preview_born_farfield.png")
-plt.savefig(out_path, bbox_inches='tight', dpi=300)
+plt.savefig(out_path)
