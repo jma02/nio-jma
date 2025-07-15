@@ -7,6 +7,7 @@ python -m venv ./venv
 source ./venv/bin/activate
 pip install -e .
 ```
+(You may need to upgrade `pip`.)
 ### Neural Inverse Operators for solving PDE Inverse Problems
 This repository is the official implementation of the paper [**Neural Inverse Operators for solving PDE Inverse Problems**](https://openreview.net/pdf?id=S4fEjmWg4X)
 

@@ -85,6 +85,15 @@ Requires-Dist: black; extra == "dev"
 Requires-Dist: isort; extra == "dev"
 Dynamic: license-file
 
+### What I added:
+I cleaned up the entire repo structure, and to facilitate the new directory structure, added
+`setuptools`.
+To set everything up, on MacOS/Linux, run:
+```
+python -m venv ./venv
+source ./venv/bin/activate
+pip install -e .
+```
 ### Neural Inverse Operators for solving PDE Inverse Problems
 This repository is the official implementation of the paper [**Neural Inverse Operators for solving PDE Inverse Problems**](https://openreview.net/pdf?id=S4fEjmWg4X)
 
@@ -95,6 +104,8 @@ This repository is the official implementation of the paper [**Neural Inverse Op
 <br/><br/>
 
 #### Requirements
+YOU CAN DO THIS BUT `pip install -e .` DOES THIS FOR YOU.
+
 The code is based on python 3 (version 3.7) and the packages required can be installed with
 ```
 python3 -m pip install -r requirements.txt
@@ -135,6 +146,7 @@ For instance:
 python3 RunNio.py Example helm nio_new 0
 
 ```
+Note: The authors say you should use the `nio_new` flag but based on what I've read in their code, `nio` should be the correct argument.
 
 The models' hyperparameter can be specified in the corresponding python scripts as well.
 To train the InversionNet model (the fully convolutional network baseline for Seismic Imaging) please refer to the GitHub page of Deng et Al (https://arxiv.org/pdf/2111.02926.pdf): https://github.com/lanl/OpenFWI
