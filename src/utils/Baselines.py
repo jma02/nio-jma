@@ -318,55 +318,48 @@ class EncoderHelm(nn.Module):
     def __init__(self, n_out, dim1=64, dim2=128, dim3=256, dim4=512, dim5=512, sample_spatial=1.0, print_bool=False, **kwargs):
         super(EncoderHelm, self).__init__()
         # self.n_out = n_out
-        self.convblock1 = ConvBlock(4, dim1, kernel_size=(7, 1), stride=(2, 1), padding=(3, 0))
-        self.convblock2_1 = ConvBlock(dim1, dim2, kernel_size=(3, 1), stride=(2, 1), padding=(1, 0))
-        self.convblock2_2 = ConvBlock(dim2, dim2, kernel_size=(3, 1), padding=(1, 0))
-        # self.convblock3_1 = ConvBlock(dim2, dim2, kernel_size=(3, 1), stride=(2, 1), padding=(1, 0))
-        # self.convblock3_2 = ConvBlock(dim2, dim2, kernel_size=(3, 1), padding=(1, 0))
-        self.convblock4_1 = ConvBlock(dim2, dim2, stride=2)
-        self.convblock4_2 = ConvBlock(dim2, dim2)
-        self.convblock5_1 = ConvBlock(dim2, dim3, stride=2)
-        self.convblock5_2 = ConvBlock(dim3, dim3)
-        self.convblock6_1 = ConvBlock(dim3, dim4, kernel_size=(5, 5), padding=0)
+        # I think they hardcode it here
+        # self.convblock1 = ConvBlock(4, dim1, kernel_size=(7, 1), stride=(2, 1), padding=(3, 0))
+
+        self.convblock1   = ConvBlock(2,    dim1, kernel_size=3, stride=2, padding=1)  # (B, 64, 50, 50)
+        self.convblock2_1 = ConvBlock(dim1, dim2, kernel_size=3, stride=2, padding=1)  # (B, 128, 25, 25)
+        self.convblock2_2 = ConvBlock(dim2, dim2, kernel_size=3, stride=2, padding=1)  # (B, 128, 13, 13)
+
+        self.convblock4_1 = ConvBlock(dim2, dim2, kernel_size=3, stride=2, padding=1)  # (B, 128, 7, 7)
+        self.convblock4_2 = ConvBlock(dim2, dim2, kernel_size=3, stride=2, padding=1)  # (B, 128, 4, 4)
+
+        self.convblock5_1 = ConvBlock(dim2, dim3, kernel_size=3, stride=2, padding=1)  # (B, 256, 2, 2)
+        self.convblock5_2 = ConvBlock(dim3, dim3, kernel_size=3, stride=1, padding=1)  # (B, 256, 2, 2)
+
+        self.convblock6_1 = ConvBlock(dim3, dim4, kernel_size=3, stride=2, padding=1)  # (B, 512, 1, 1)
+
+        # self.linear = nn.Linear(512, n_out)
         self.linear = nn.Linear(512, n_out)
         self.print_bool = print_bool
 
     def forward(self, x):
-        # x = x.permute(0, 3, 1, 2)
         # Encoder Part
         if self.print_bool: print(x.shape)
-        x = self.convblock1(x)  # (None, 32, 49, 16)
+        x = self.convblock1(x)
         if self.print_bool: print(x.shape)
-        x = self.convblock2_1(x)  # (None, 64, 25, 16)
+        x = self.convblock2_1(x) 
         if self.print_bool: print(x.shape)
-        x = self.convblock2_2(x)  # (None, 64, 25, 16)
+        x = self.convblock2_2(x) 
         if self.print_bool: print(x.shape)
-        # x = self.convblock3_1(x)  # (None, 64, 13, 16)
-        # if self.print_bool: print(x.shape)
-        # x = self.convblock3_2(x)  # (None, 64, 13, 16)
-        # if self.print_bool: print(x.shape)
-        x = self.convblock4_1(x)  # (None, 128, 63, 70)
+    
+        x = self.convblock4_1(x)
         if self.print_bool: print(x.shape)
-        x = self.convblock4_2(x)  # (None, 128, 63, 70)
+        x = self.convblock4_2(x) 
         if self.print_bool: print(x.shape)
-        x = self.convblock5_1(x)  # (None, 128, 32, 35)
+        x = self.convblock5_1(x) 
         if self.print_bool: print(x.shape)
-        x = self.convblock5_2(x)  # (None, 128, 32, 35)
+        x = self.convblock5_2(x)  
         if self.print_bool: print(x.shape)
-        x = self.convblock6_1(x)  # (None, 256, 16, 18)
+        x = self.convblock6_1(x) 
         if self.print_bool: print(x.shape)
-        # x = self.convblock6_2(x)  # (None, 256, 16, 18)
-        # if self.print_bool: print(x.shape)
-        # x = self.convblock7_1(x)  # (None, 256, 8, 9) 7
-        # if self.print_bool: print(x.shape)
-        # x = self.convblock7_2(x)  # (None, 256, 8, 9)
-        # if self.print_bool: print(x.shape)
-        # x = self.convblock8(x)  # (None, 512, 1, 1)
-        # if self.print_bool: print(x.shape)
+    
         x = nn.Flatten()(x)
         if self.print_bool: print(x.shape)
-        # if self.n_out != 512:
-        #    x = self.linear(x)
         x = self.linear(x)
         if self.print_bool: print(x.shape)
         if self.print_bool: quit()

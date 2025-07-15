@@ -1,0 +1,14 @@
+step_size,15
+gamma,1
+epochs,100
+batch_size,256
+learning_rate,0.01
+norm,minmax
+weight_decay,0
+reg_param,0
+reg_exponent,1
+inputs,2
+b_scale,0.0
+retrain,888
+mapping_size_ff,32
+scheduler,step

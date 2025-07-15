@@ -1,0 +1,6 @@
+Training Error: 0.0
+Testing Error: 44.000341778709796
+Best Testing Error: 34.44681574427893
+Current Epoch: 66
+Time per Epoch: 57.47100827401502
+Workers: 2

@@ -11,8 +11,8 @@ def get_training_properties():
         "gamma": 1,
         "epochs": 100,
         "batch_size": 256,
-        "learning_rate": 0.001,
-        "norm": "log-minmax",
+        "learning_rate": 0.01,
+        "norm": "minmax",
         "weight_decay": 0,
         "reg_param": 0,
         "reg_exponent": 1,
@@ -79,7 +79,7 @@ def get_model(
     """
     if mod in ["nio", "don"]:
         print("Using CNIO")
-        if problem in ["sine", "helm", "step"]:
+        if problem in ["sine", "helm", "step", "born_farfield"]:
             return SNOHelmConv(
                 input_dimensions_branch=inp_dim_branch,
                 input_dimensions_trunk=grid.shape[2],

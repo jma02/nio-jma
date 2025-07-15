@@ -73,6 +73,8 @@ elif problem == "rad":
     from datasets.AlbedoOperator import AlbedoOperatorDataset as MyDataset
 elif problem == "eit":
     from datasets.HeartLungsEIT import HeartLungsEITDataset as MyDataset
+elif problem == "born_farfield":
+    from datasets.BornFarField import BornFarFieldDataset as MyDataset
 
 if torch.cuda.is_available():
     memory_avail = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
@@ -113,9 +115,10 @@ fno_input_dimension = denseblock_architecture_["neurons"]
 cuda_debugger = CudaMemoryDebugger(print_mem)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_dataset = MyDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="training", mod=mod)
-test_dataset = MyDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="validation", mod=mod, noise=0.1)
+# We validate on 0 noise
+test_dataset = MyDataset(norm=norm, inputs_bool=inputs_bool, device=device, which="validation", mod=mod, noise=0.0)
 inp_dim_branch = train_dataset.inp_dim_branch
-n_fun_samples = train_dataset.n_fun_samples
+# n_fun_samples = train_dataset.n_fun_samples
 
 grid = train_dataset.get_grid().squeeze(0)
 
@@ -192,7 +195,8 @@ print(size, file=f)
 batch_acc = 16
 if torch.cuda.is_available():
     batch_acc = batch_acc * torch.cuda.device_count()
-
+print("Batch size: ", batch_size)
+print("Batch size with accumulation: ", batch_acc)
 print("Maximum number of workers: ", max_workers)
 training_set = DataLoader(train_dataset, batch_size=batch_acc, shuffle=True, num_workers=max_workers, pin_memory=True)
 testing_set = DataLoader(test_dataset, batch_size=40, shuffle=True, num_workers=max_workers, pin_memory=True)
@@ -225,7 +229,7 @@ lr_all = list()
 training_all = list()
 
 counter = 0
-patience = int(0.1 * epochs)
+patience = int(0.5 * epochs)
 time_per_epoch = 0
 for epoch in range(start_epoch, epochs + start_epoch):
     bar = tqdm(unit="batch", disable=disable)

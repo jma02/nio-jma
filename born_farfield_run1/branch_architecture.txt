@@ -1,0 +1,5 @@
+n_hidden_layers,3
+neurons,64
+act_string,leaky_relu
+dropout_rate,0.0
+kernel_size,3

@@ -1,0 +1,5 @@
+n_hidden_layers,4
+neurons,2000
+act_string,leaky_relu
+retrain,56
+dropout_rate,0.0

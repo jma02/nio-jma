@@ -24,6 +24,13 @@ f_i = farfield_imag.T.reshape(N_SAMPLES, 100, 100)
 # Make grid
 grid_x = np.tile(np.linspace(0, 1, 100), (100, 1))
 grid_y = np.tile(np.linspace(0, 1, 100), (100, 1)).T
+# Pretty print grid_x, grid_y
+print("\nGrid X (first 5x5):")
+print(grid_x[:5, :5])
+print("\nGrid Y (first 5x5):")
+print(grid_y[:5, :5])
+print("\nGrid X range: [{:.3f}, {:.3f}]".format(np.min(grid_x), np.max(grid_x)))
+print("Grid Y range: [{:.3f}, {:.3f}]".format(np.min(grid_y), np.max(grid_y)))
 
 max_inp_re = np.max(f_r)
 max_inp_im = np.max(f_i)
@@ -48,8 +55,9 @@ testing_samples = N_SAMPLES - training_samples - validation_samples
 
 # Save to new HDF5 file
 with h5py.File(output_file, "w") as hdf_out:
-    # Create grid dataset (combine grid_x and grid_y)
-    grid = np.stack([grid_x, grid_y], axis=-1)
+    # Create grid dataset (combine grid_y and grid_x)
+    # Don't ask why y comes before x
+    grid = np.stack([grid_y, grid_x], axis=-1)
     hdf_out.create_dataset("grid", data=grid)
     
     # Create scalar datasets
@@ -78,16 +86,16 @@ with h5py.File(output_file, "w") as hdf_out:
     val_end = train_end + validation_samples
     
     # Training data
-    training_group.create_dataset("input_real", data=f_r[:train_end])
-    training_group.create_dataset("input_imag", data=f_i[:train_end])
-    training_group.create_dataset("output", data=images[:train_end])
+    training_group.create_dataset("inputs_real", data=f_r[:train_end])
+    training_group.create_dataset("inputs_imag", data=f_i[:train_end])
+    training_group.create_dataset("outputs", data=images[:train_end])
     
     # Validation data
-    validation_group.create_dataset("input_real", data=f_r[train_end:val_end])
-    validation_group.create_dataset("input_imag", data=f_i[train_end:val_end])
-    validation_group.create_dataset("output", data=images[train_end:val_end])
+    validation_group.create_dataset("inputs_real", data=f_r[train_end:val_end])
+    validation_group.create_dataset("inputs_imag", data=f_i[train_end:val_end])
+    validation_group.create_dataset("outputs", data=images[train_end:val_end])
     
     # Testing data
-    testing_group.create_dataset("input_real", data=f_r[val_end:])
-    testing_group.create_dataset("input_imag", data=f_i[val_end:])
-    testing_group.create_dataset("output", data=images[val_end:])
+    testing_group.create_dataset("inputs_real", data=f_r[val_end:])
+    testing_group.create_dataset("inputs_imag", data=f_i[val_end:])
+    testing_group.create_dataset("outputs", data=images[val_end:])

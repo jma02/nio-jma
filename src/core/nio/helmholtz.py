@@ -7,6 +7,7 @@ from core.deeponet.DeepONetModules import FeedForwardNN, \
     DeepOnetNoBiasOrg
 from core.fno.FNOModules import FNO2d, FNO_WOR
 
+# We are using this one for farfield.
 class SNOHelmConv(nn.Module):
     def __init__(self,
                  input_dimensions_branch,
