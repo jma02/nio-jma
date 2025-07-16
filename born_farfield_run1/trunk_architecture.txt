@@ -1,5 +1,0 @@
-n_hidden_layers,8
-neurons,256
-act_string,leaky_relu
-dropout_rate,0.0
-n_basis,50

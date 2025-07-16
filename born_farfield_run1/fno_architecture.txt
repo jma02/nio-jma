@@ -1,3 +1,0 @@
-width,64
-modes,16
-n_layers,1
