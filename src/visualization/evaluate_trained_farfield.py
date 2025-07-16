@@ -8,9 +8,9 @@ print(f"Using device: {device}")
 
 import cmocean
 
-model = torch.load("born_farfield_run1/model.pkl", map_location=device)
+model = torch.load("born_farfield_run1/model.pkl", map_location=device, weights_only=False)
 
-norm = "log-minmax"
+norm = "minmax"
 inputs_bool = 2
 max_workers = 2
 
