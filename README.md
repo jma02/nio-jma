@@ -8,6 +8,7 @@ source ./venv/bin/activate
 pip install -e .
 ```
 (You may need to upgrade `pip`.)
+
 Important files:
 - `data/utils/modify_farfield.py`
     - we use this to process our farfield dataset into the shape that NIO will accept
