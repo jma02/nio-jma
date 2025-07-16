@@ -29,7 +29,9 @@ Also see the `model_selection` folder. This is the original authors hyperparamet
 
 My GPU doesn't use slurm, so I ran 
 
-```nohup python3 RunNio.py born_farfield_run1 born_farfield nio 2 > output.log 2>&1 &```
+```
+nohup python3 RunNio.py born_farfield_run1 born_farfield nio 2 > output.log 2>&1 &
+```
 
 to train the model contained in `born_farfield_run1/`,
 where
