@@ -30,6 +30,7 @@ Also see the `model_selection` folder. This is the original authors hyperparamet
 My GPU doesn't use slurm, so I ran 
 ```nohup python3 RunNio.py born_farfield_run1 born_farfield nio 2 > output.log 2>&1 &```
 to train the model contained in `born_farfield_run1/`,
+where
 - `born_farfield_run1` specifies the output directory of artifacts from the model training
 - `nio` is the architecture we use (we do not want to change this)
 - `2` is the number of GPUs available on your machine
