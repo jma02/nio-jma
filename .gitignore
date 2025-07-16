@@ -2,6 +2,7 @@ venv/
 data/*
 !data/utils/
 born_farfield_run1/
+born_farfield_run1.zip
 
 .DS_Store
 
