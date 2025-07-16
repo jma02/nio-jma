@@ -15,7 +15,6 @@ max_workers = 2
 eval_dataset = HelmNIODataset(norm=norm, inputs_bool=inputs_bool, device=device, which="testing", mod="nio")
 grid = eval_dataset.get_grid().squeeze(0).to(device)
 eval_dataset = DataLoader(eval_dataset, batch_size=128, shuffle=True, num_workers=max_workers, pin_memory=True)
-# ...existing code...
 
 errors = []
 relative_errors = []

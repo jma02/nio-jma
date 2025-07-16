@@ -8,6 +8,35 @@ source ./venv/bin/activate
 pip install -e .
 ```
 (You may need to upgrade `pip`.)
+Important files:
+- `data/utils/modify_farfield.py`
+    - we use this to process our farfield dataset into the shape that NIO will accept
+- `src/core/nio/helmholtz.py`     
+    - unmodified from original authors code, but we use their NIO architecture
+- `src/datasets/BornFarField.py`
+    - we transform our modified .hdf5 file into a Pytorch dataset that NIO will accept
+- `src/utils/Baselines.py`
+    - see the EncoderHelm class. this is a hardcoded network, which we may try to tune for our purposes
+- `src/visualization/evaluate_trained_helmholtz.py`
+    - specify an trained model.pkl, and it will generate some predictions vs. true images, and give some relevant statistics for our model
+- `RunNio.py`
+    - primary training loop
+- `run_nio_config.py`
+    - manually set hyperparameters here if you are running `RunNio.py` manually
+
+Also see the `model_selection` folder. This is the original authors hyperparameter grid search code. We may use it, although it may be much simpler to just write our own grid search.
+
+My GPU doesn't use slurm, so I ran 
+```nohup python3 RunNio.py born_farfield_run1 born_farfield nio 2 > output.log 2>&1 &```
+to train the model contained in `born_farfield_run1/`,
+- `born_farfield_run1` specifies the output directory of artifacts from the model training
+- `nio` is the architecture we use (we do not want to change this)
+- `2` is the number of GPUs available on your machine
+- `output.log` is where stdout gets dumped. (fair warning, because we use `tqdm` this file gets pretty big)
+
+If you are using slurm you may have to write your own sbatch script.
+Below is the authors original `README.md`.
+
 ### Neural Inverse Operators for solving PDE Inverse Problems
 This repository is the official implementation of the paper [**Neural Inverse Operators for solving PDE Inverse Problems**](https://openreview.net/pdf?id=S4fEjmWg4X)
 
