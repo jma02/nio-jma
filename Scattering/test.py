@@ -31,7 +31,7 @@ image_Ngrid = 100
 Ngrid = 100
 nfar = 100
 
-delta_noise = 1.0
+delta_noise = 0.0
 
 farfield_tensor = torch.tensor(farfield, dtype=torch.float32)
 farfield_tensor = farfield_tensor.to(device)
@@ -267,8 +267,24 @@ grid_x = np.tile(np.linspace(0, 1, 100), (100, 1))
 grid_y = np.tile(np.linspace(0, 1, 100), (100, 1)).T
 grid = torch.tensor(np.stack([grid_y, grid_x], axis=-1)).type(torch.float32).to(device)
 
-NIO_opt = torch.load("born_farfield_run1/model.pkl", map_location=device, weights_only=False)
+NIO_opt = torch.load("born_farfield_run2/model.pkl", map_location=device, weights_only=False)
 NIO_opt_preds = []
+
+
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters())
+
+def count_trainable_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+print(f"Number of parameters for CNNB model: {count_parameters(CNNB_opt)}")
+print(f"Number of trainable parameters for CNNB model: {count_trainable_parameters(CNNB_opt)}")
+print(f"Number of parameters for CNNB model {count_parameters(BCNN_opt)}")
+print(f"Number of trainable parameters for CNNB model: {count_trainable_parameters(BCNN_opt)}")
+print(f"Number of parameters for CNN model: {count_parameters(CNN_opt)}")
+print(f"Number of trainable parameters for CNN model: {count_trainable_parameters(CNN_opt)}")
+print(f"Number of parameters for NIO model: {count_parameters(NIO_opt)}")
+print(f"Number of trainable parameters for NIO model: {count_trainable_parameters(NIO_opt)}")
 
 # NIO preprocesses data with minmax normalization on the real and imaginary parts of far field (or whatever you used to train it)
 # Hack but I'm lazy
@@ -354,7 +370,7 @@ tick_labels = [r"$-1$", r"$0$", r"$1$"]
 l2error = {"Born1": [], "NIO": [], "CNNB": [], "BCNN": [], "CNN": []}
 l1error = {"Born1": [], "NIO": [], "CNNB": [], "BCNN": [], "CNN": []}
 
-N_TEST_SAMPLES = 10
+N_TEST_SAMPLES = 40
 for i in range(N_TEST_SAMPLES):
     print("Sample: ", i)
     ground_truth = images[i].cpu().numpy().flatten()

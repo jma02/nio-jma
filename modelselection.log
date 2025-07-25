@@ -1,0 +1,123 @@
+nohup: ignoring input
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_0' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 64, "modes": 16, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Starting job 0 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_1' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 32, "n_layers": 3}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Starting job 1 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_2' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 32, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 2 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_3' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 32, "n_layers": 4}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 3 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_4' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.001, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 32, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 4 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_5' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.001, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 64, "modes": 16, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 5 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_6' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.001, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 32, "modes": 32, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 6 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_7' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 4, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 32, "modes": 16, "n_layers": 4}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 7 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_8' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.001, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 32, "modes": 32, "n_layers": 4}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 8 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_9' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 32, "modes": 16, "n_layers": 3}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 9 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_10' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 4, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 32, "modes": 16, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 10 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_11' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 4, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 32, "n_layers": 3}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 11 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_12' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 32, "modes": 32, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 12 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_13' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.001, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 32, "modes": 32, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 13 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_14' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 16, "n_layers": 4}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 14 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_15' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 32, "modes": 32, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 15 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_16' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 4, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 32, "modes": 16, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 16 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_17' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 4, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 32, "modes": 32, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 17 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_18' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 4, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 16, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 18 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_19' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.001, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 64, "modes": 32, "n_layers": 3}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 19 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_20' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 32, "modes": 16, "n_layers": 4}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 20 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_21' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 64, "modes": 16, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 21 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_22' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 4, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 32, "modes": 16, "n_layers": 3}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 22 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_23' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 4, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 64, "modes": 32, "n_layers": 4}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 23 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_24' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 1, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 32, "modes": 16, "n_layers": 3}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 24 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_25' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.1, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 16, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 25 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_26' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.001, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 6, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 32, "n_layers": 2}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 26 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_27' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 32, "modes": 16, "n_layers": 4}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 27 on GPU 1
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_28' '{"step_size": 15, "gamma": 0.98, "epochs": 100, "batch_size": 256, "learning_rate": 0.01, "norm": "minmax", "weight_decay": 1e-06, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 100}' '{"width": 64, "modes": 16, "n_layers": 3}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 28 on GPU 0
+###################################
+python3 RunNio.py  'ModelSelection_final_s_born_farfield_nio/Setup_29' '{"step_size": 15, "gamma": 1.0, "epochs": 100, "batch_size": 256, "learning_rate": 0.001, "norm": "minmax", "weight_decay": 0.0, "reg_param": 0.0, "reg_exponent": 2, "inputs": 2, "b_scale": 0.0, "retrain": 888, "mapping_size_ff": 32, "scheduler": "step"}' '{"n_hidden_layers": 3, "neurons": 64, "act_string": "leaky_relu", "dropout_rate": 0.0, "kernel_size": 3}' '{"n_hidden_layers": 8, "neurons": 256, "act_string": "leaky_relu", "dropout_rate": 0.0, "n_basis": 50}' '{"width": 64, "modes": 16, "n_layers": 4}' '{"n_hidden_layers": 2, "neurons": 50, "act_string": "leaky_relu", "retrain": 127, "dropout_rate": 0.0}' born_farfield nio 2
+Job finished with return code: 0
+Starting job 29 on GPU 1
+Waiting for all remaining jobs to complete...
+Job 28 on GPU 0 finished with return code: 0
+Job 29 on GPU 1 finished with return code: 0
+All jobs completed!

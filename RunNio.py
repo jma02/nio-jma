@@ -213,7 +213,7 @@ if os.path.isfile(folder + "/optimizer_state.pkl"):
     checkpoint = torch.load(folder + "/optimizer_state.pkl")
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
-p = 1
+p = 2
 if p == 2:
     my_loss = torch.nn.MSELoss()
 elif p == 1:
