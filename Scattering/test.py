@@ -267,7 +267,7 @@ grid_x = np.tile(np.linspace(0, 1, 100), (100, 1))
 grid_y = np.tile(np.linspace(0, 1, 100), (100, 1)).T
 grid = torch.tensor(np.stack([grid_y, grid_x], axis=-1)).type(torch.float32).to(device)
 
-NIO_opt = torch.load("born_farfield_run2/model.pkl", map_location=device, weights_only=False)
+NIO_opt = torch.load("ModelSelection_final_s_born_farfield_nio/Setup_13/model.pkl", map_location=device, weights_only=False)
 NIO_opt_preds = []
 
 

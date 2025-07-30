@@ -49,6 +49,10 @@ class BornFarFieldDataset(Dataset):
         else:
             raise ValueError("Invalid 'which' value. Choose from 'training', 'validation', or 'testing'.")
 
+        print(f"min_data_real: {self.min_data_real}, max_data_real: {self.max_data_real}")
+        print(f"min_data_imag: {self.min_data_imag}, max_data_imag: {self.max_data_imag}")
+        print(f"min_model: {self.min_model}, max_model: {self.max_model}")
+
     def __len__(self):
         return self.length
 
